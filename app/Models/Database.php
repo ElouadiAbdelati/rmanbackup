@@ -14,13 +14,13 @@ class Database {
     }
 
     public static function logMode(String $usernsme, String $password) {
-        $command =  self::$path + "log_mode.sh"." ".$usernsme." ".$password;
+        $command =  self::$path."log_mode.sh"." ".$usernsme." ".$password;
         $rs =  Outils::execute($command);
         return $rs;
     }
 
-    public static function ModifyLogMode(String $usernsme, String $password, String $mode) {
-        $command=  self::$path + "modify_log_mode.sh"." ".$usernsme." ".$password." ".$mode;
+    public static function modifyLogMode(String $usernsme, String $password, String $mode) {
+        $command=  self::$path."modify_log_mode.sh"." ".$usernsme." ".$password." ".$mode;
         $rs =  Outils::execute($command);
         return $rs;
     }

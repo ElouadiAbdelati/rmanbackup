@@ -28,6 +28,22 @@ class Backup {
 
 
     }
+    public static function differentialBackup(String $usernsme, String $password,String $level,String $tag) {
+
+        $command=  self::$path."differentialBackup.sh"." ".$usernsme." ".$password." ".$level." ".$tag;
+        $rs = Outils::execute($command);
+        return $rs;
+
+
+    }
+    public static function cumulativeBackup(String $usernsme, String $password,String $level,String $tag) {
+
+        $command=  self::$path."cumulativeBackup.sh"." ".$usernsme." ".$password." ".$level." ".$tag;
+        $rs = Outils::execute($command);
+        return $rs;
+
+
+    }
 
 
 }

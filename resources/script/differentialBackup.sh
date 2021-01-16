@@ -5,10 +5,8 @@ ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe; export ORACLE_HOME;
 NLS_LANG=AMERICAN_AMERICA.AL32UTF8; export NLS_LANG;
 ORACLE_SID=XE; export ORACLE_SID;
 
-$ORACLE_HOME/bin/sqlplus -s $1 as sysdba   <<EOF
-  $2 
- alter database open;
- Startup mount
- Alter database $3;
- alter database open;
+$ORACLE_HOME/bin/rman target $1/$2 <<EOF
+BACKUP INCREMENTAL LEVEL $3 DATABASE TAG '$4';
 EOF
+
+
