@@ -6,7 +6,7 @@ use App\Models\Outils;
 
 class Backup {
 
-    public static  $path ="/home/elouadi/Desktop/irisi/db/";
+    public static  $path ="/home/elouadi/Desktop/irisi/laravel/backup/resources/script/";
 
     public static function  fullBackup(String $usernsme, String $password) {
         $command =  self::$path."fullBackup.sh"." ".$usernsme." ".$password;
