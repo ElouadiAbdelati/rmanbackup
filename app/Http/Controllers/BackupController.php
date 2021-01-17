@@ -13,7 +13,7 @@ class BackupController extends Controller
         /**
          * good
          */
-      $rs = Backup::listBuckups("sys","elouadi");
+   //   $rs = Backup::listBuckups("sys","elouadi");
 
       /**
          * good
@@ -56,6 +56,11 @@ class BackupController extends Controller
       * WORKING
       */
       //$rs = Backup::cumulativeBackup("sys","elouadi","1","JEU_INC_N1_CUM");
+
+        /**
+      * WORKING
+      */
+     $rs = Backup::listBackupsetTag("sys","elouadi","JEU_INC_N1_CUM");
 
        return view('backup',['listBackup' =>  $rs ]);
 

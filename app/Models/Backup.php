@@ -14,12 +14,6 @@ class Backup {
         return $rs;
     }
 
-    public static function listBuckups(String $usernsme, String $password) {
-        $command =self::$path."listBuckups.sh"." ".$usernsme." ".$password;
-        $rs =  Outils::execute($command);
-        return $rs;
-    }
-
     public static function backupIncremental(String $usernsme, String $password,String $scn) {
 
         $command=  self::$path."backupIncremental.sh"." ".$usernsme." ".$password." ".$scn;
@@ -45,5 +39,14 @@ class Backup {
 
     }
 
-
+    public static function listBuckups(String $usernsme, String $password) {
+        $command =self::$path."listBuckups.sh"." ".$usernsme." ".$password;
+        $rs =  Outils::execute($command);
+        return $rs;
+    }
+    public static function listBackupsetTag(String $usernsme, String $password,String $tag){
+        $command =self::$path."listBackupsetTag.sh"." ".$usernsme." ".$password." ".$tag;
+        $rs =  Outils::execute($command);
+        return $rs;
+    }
 }
