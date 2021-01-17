@@ -13,7 +13,7 @@ class BackupController extends Controller
         /**
          * good
          */
-      $rs = Backup::listBuckups("sys","elouadi");
+    //  $rs = Backup::listBuckups("sys","elouadi");
 
       /**
          * good
@@ -34,7 +34,7 @@ class BackupController extends Controller
      /**
       * good
       */
-     //$rs = Database::logMode("system","elouadi");
+     $rs = Database::logMode("sys","elouadi");
 
      /**
       * Working
@@ -47,30 +47,30 @@ class BackupController extends Controller
      // $rs = Backup::backupIncremental("sys","elouadi","807334");
 
 
-       /**
+    /**
       * WORKING
       */
       //$rs = Backup::differentialBackup("sys","elouadi","1","JEU_INC_N1_DIF");
 
-      /**
+    /**
       * WORKING
       */
       //$rs = Backup::cumulativeBackup("sys","elouadi","1","JEU_INC_N1_CUM");
 
-        /**
+    /**
       * WORKING
       */
      // $rs = Backup::listBackupsetTag("sys","elouadi","JEU_INC_N1_CUM");
 
 
 
-        /**
+    /**
       * WORKING
       */
       // $rs = Backup::deteleAll("sys","elouadi");
 
 
-        /**
+    /**
       * WORKING
       */
      // $rs = Backup::deteleByNumber("sys","elouadi","3");
