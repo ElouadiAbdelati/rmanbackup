@@ -13,12 +13,12 @@ class BackupController extends Controller
         /**
          * good
          */
-   //   $rs = Backup::listBuckups("sys","elouadi");
+      $rs = Backup::listBuckups("sys","elouadi");
 
       /**
          * good
          */
-     //   $rs = Backup::fullBackup("sys","elouadi");
+    //   $rs = Backup::fullBackup("sys","elouadi");
 
 
        /**
@@ -27,7 +27,7 @@ class BackupController extends Controller
       // $rs = Database::checkCurrentScn("system","elouadi");
 
       /**
-       * not yet
+       * working
        */
      // $rs = Database::modifyLogMode("system","elouadi","archivelog");
 
@@ -60,8 +60,20 @@ class BackupController extends Controller
         /**
       * WORKING
       */
-     $rs = Backup::listBackupsetTag("sys","elouadi","JEU_INC_N1_CUM");
+     // $rs = Backup::listBackupsetTag("sys","elouadi","JEU_INC_N1_CUM");
 
+
+
+        /**
+      * WORKING
+      */
+      // $rs = Backup::deteleAll("sys","elouadi");
+
+
+        /**
+      * WORKING
+      */
+     // $rs = Backup::deteleByNumber("sys","elouadi","3");
        return view('backup',['listBackup' =>  $rs ]);
 
    }

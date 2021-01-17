@@ -49,4 +49,17 @@ class Backup {
         $rs =  Outils::execute($command);
         return $rs;
     }
+
+
+    public static function deteleAll(String $usernsme, String $password){
+        $command =self::$path."deleteAllbackups.sh"." ".$usernsme." ".$password;
+        $rs =  Outils::execute($command);
+        return $rs;
+    }
+
+    public static function deteleByNumber(String $usernsme, String $password, $number ){
+        $command =self::$path."deleteBackupset.sh"." ".$usernsme." ".$password." ".$number;
+        $rs =  Outils::execute($command);
+        return $rs;
+    }
 }
