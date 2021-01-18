@@ -3,6 +3,7 @@
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\FullBackupController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\ListBackupController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +25,11 @@ Route::get('/test', [BackupController::class, 'test']);
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
 
-Route::get('/fullbackup', [FullBackupController::class, 'index'])->name('fullbackup');
+
+Route::any('/fullbackup', [FullBackupController::class, 'index'])->name('fullbackup');
+Route::any('/fullbackupForm', [FullBackupController::class, 'fullbackup'])->name('fullbackupForm');
+
+
+Route::any('/listbackups', [ ListBackupController::class, 'index'])->name('listbackups');
+Route::any('/listbackupsForm', [ ListBackupController::class, 'listbackups'])->name('listbackupsForm');
 

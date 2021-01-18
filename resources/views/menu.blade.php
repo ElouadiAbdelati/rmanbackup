@@ -23,13 +23,13 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('fullbackup')}}">
                 <i class="ni ni-planet text-orange"></i>
-                <span class="nav-link-text">full backup</span>
+                <span class="nav-link-text">Full backup</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/map.html">
+              <a class="nav-link" href="{{url('listbackups')}}">
                 <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">inc backup</span>
+                <span class="nav-link-text">List backups</span>
               </a>
             </li>
             <li class="nav-item">

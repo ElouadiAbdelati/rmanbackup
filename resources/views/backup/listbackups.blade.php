@@ -6,7 +6,7 @@
             <div class=" col ">
                 <div class="card">
                     <div class="card-header bg-transparent">
-                        <h3 class="mb-0">Full Backup</h3>
+                        <h3 class="mb-0">List Backups</h3>
                     </div>
                     @isset($form)
                     {!! form_start($form )!!}
