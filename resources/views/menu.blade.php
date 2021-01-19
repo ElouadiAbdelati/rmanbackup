@@ -6,7 +6,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <img src="assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+          <img src="irisi.png" class="navbar-brand-img" style="width: 200px;height: 300px;" alt="...">
         </a>
       </div>
       <div class="navbar-inner">
@@ -19,54 +19,73 @@
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
+              <hr class="my-3">
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('listbackups')}}">
+                    <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">List backups</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('listbackupsTag')}}">
+                    <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">List backups by Tag</span>
+                </a>
+              </li>
+              <hr class="my-3">
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url('fullbackup')}}">
-                <i class="ni ni-planet text-orange"></i>
+                <i class="ni ni-archive-2 text-orange"></i>
                 <span class="nav-link-text">Full backup</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('listbackups')}}">
-                <i class="ni ni-pin-3 text-primary"></i>
-                <span class="nav-link-text">List backups</span>
+              <a class="nav-link" href="{{url('incrementalbackup')}}">
+                <i class="ni ni-archive-2 text-orange"></i>
+                <span class="nav-link-text">Incremental backup</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/profile.html">
-                <i class="ni ni-single-02 text-yellow"></i>
-                <span class="nav-link-text">dif backup</span>
+                <a class="nav-link" href="{{url('differentialbackup')}}">
+                  <i class="ni ni-archive-2 text-orange"></i>
+                  <span class="nav-link-text">Differential backup</span>
+                </a>
+              </li>
+            <hr class="my-3">
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('checkCurrentScn')}}">
+                  <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">Check Current Scn</span>
+                </a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('logmode')}}">
+                <i class="ni ni-check-bold text-default"></i>
+                <span class="nav-link-text">Log mode</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/tables.html">
-                <i class="ni ni-bullet-list-67 text-default"></i>
-                <span class="nav-link-text">list backup</span>
+              <a class="nav-link" href="{{url('modifylogmode')}}">
+                <i class=" ni ni-atom text-info " ></i>
+                <span class="nav-link-text">Change log mode</span>
               </a>
             </li>
+            <hr class="my-3">
             <li class="nav-item">
-              <a class="nav-link" href="examples/login.html">
-                <i class="ni ni-key-25 text-info"></i>
-                <span class="nav-link-text">Login</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="examples/register.html">
-                <i class="ni ni-circle-08 text-pink"></i>
-                <span class="nav-link-text">Register</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="examples/upgrade.html">
-                <i class="ni ni-send text-dark"></i>
-                <span class="nav-link-text">Upgrade</span>
-              </a>
-            </li>
+                <a class="nav-link" href="{{url('delete')}}">
+                  <i class="ni ni-fat-remove text-orange"></i>
+                  <span class="nav-link-text"> delete backups</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('deletebackupbynumber')}}">
+                  <i class="ni ni-fat-remove text-orange"></i>
+                  <span class="nav-link-text"> Delete backup by number</span>
+                </a>
+              </li>
           </ul>
           <!-- Divider -->
-          <hr class="my-3">
-
-
 
 
           </ul>

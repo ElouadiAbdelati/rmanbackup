@@ -27,10 +27,16 @@
 
                                     </div>
                                 </div>
-                                <div class="col-lg-3col-md-3">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        {!! form_row($form->tag, $options = ['attr' => ['class' => 'form-control',
+                                        'placeholder' => 'tag']]) !!}
 
+                                    </div>
+                                </div>
+                                <div class="col-lg-3col-md-3">
                                     {!! form_row($form->envoyer, $options = ['attr' => ['title' => 'submit',
-                                    'class' => 'btn-icon-clipboard', ' data-clipboard-text' => 'submit']]) !!}
+                                    'class' => 'btn-icon-clipboard', ' data-clipboard-text' => 'submit ']]) !!}
                                 </div>
 
                             </div>
@@ -68,7 +74,7 @@
                         @endisset
 
                         @isset($error)
-                            @if($error)
+                          @if($error)
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="card bg-default">
@@ -91,7 +97,7 @@
                                     </div>
                                 </div>
                             </div>
-                          @endif
+                            @endisset
                         @endisset
                     </div>
                 </div>

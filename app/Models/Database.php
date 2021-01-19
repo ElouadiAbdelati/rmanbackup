@@ -20,7 +20,7 @@ class Database {
     }
 
     public static function modifyLogMode(String $usernsme, String $password, String $mode) {
-        $command=  self::$path."modify_log_mode.sh"." ".$usernsme." ".$password." ".$mode;
+        $command=  self::$path."modify_lodg_mode.sh"." ".$usernsme." ".$password." ".$mode;
         $rs =  Outils::execute($command);
         return $rs;
     }

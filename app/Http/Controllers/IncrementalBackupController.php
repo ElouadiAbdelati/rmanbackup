@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\FullBackup;
 use App\Models\Backup;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
-class FullBackupController extends Controller
+class IncrementalBackupController extends Controller
 {
-
-     private $formBuilder;
+    private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
          $this->formBuilder=$formBuilder;
@@ -25,18 +23,18 @@ class FullBackupController extends Controller
             dd($form->getData());
         }
 
-        return view('backup/fullbackup',compact('form'));
+        return view('backup/incrementalbackup',compact('form'));
 
      }
 
-     public function fullbackup(FormBuilder $formBuilder)
+     public function incrementalbackup(FormBuilder $formBuilder)
      {
          $form =$this->getFotm();
          $form->redirectIfNotValid();
          $data=$form->getFieldValues();
-         $rs = Backup::fullBackup($data['username'],$data['password']);
+         $rs = Backup::backupIncremental($data['username'],$data['password'],$data['scn']);
 
-         return view('backup/fullbackup',['rs'=>$rs]);
+         return view('backup/incrementalbackup',['rs'=>$rs]);
 
      }
 
@@ -44,8 +42,10 @@ class FullBackupController extends Controller
      private function getFotm(){
        return $this->formBuilder->create('App\Forms\FormBackup', [
             'method' => 'POST',
-            'url' => route('fullbackupForm')
+            'url' => route('incrementalbackupForm'),
+            'data'=> [
+                'scn'=>true
+            ]
         ]);
      }
-
 }

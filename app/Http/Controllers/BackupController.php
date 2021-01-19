@@ -5,76 +5,82 @@ namespace App\Http\Controllers;
 use App\Models\Backup;
 use App\Models\Database;
 use Illuminate\Http\Request;
+use Kris\LaravelFormBuilder\FormBuilder;
 
 class BackupController extends Controller
 {
 
-    public function test()
+    private $formBuilder;
+    public function __construct(FormBuilder $formBuilder)
     {
-        /**
-         * good
-         */
-    $rs = Backup::listBuckups("sys","elouadi");
-
-        /**
-         * good
-         */
-        //   $rs = Backup::fullBackup("sys","elouadi");
+        $this->formBuilder = $formBuilder;
+    }
 
 
-        /**
-         * good
-         */
-        // $rs = Database::checkCurrentScn("system","elouadi");
-
-        /**
-         * working
-         */
-        // $rs = Database::modifyLogMode("system","elouadi","archivelog");
-
-        /**
-         * good
-         */
-       // $rs = Database::logMode("sys", "elouadi");
-
-        /**
-         * Working
-         *RMAN utilise le SCN sélectionné comme base pour cette sauvegarde incrémentielle.
-         *Pour tous les fichiers en cours de sauvegarde, RMAN inclut tous les blocs de données
-         *qui ont été modifiés à des SCN supérieurs ou égaux à FROM SCNdans la sauvegarde
-         * incrémentielle.
-         */
-
-        // $rs = Backup::backupIncremental("sys","elouadi","807334");
+    public function index(FormBuilder $formBuilder)
+    {
+    }
 
 
-        /**
-         * WORKING
-         */
-        //$rs = Backup::differentialBackup("sys","elouadi","1","JEU_INC_N1_DIF");
-
-        /**
-         * WORKING
-         */
-        //$rs = Backup::cumulativeBackup("sys","elouadi","1","JEU_INC_N1_CUM");
-
-        /**
-         * WORKING
-         */
-        // $rs = Backup::listBackupsetTag("sys","elouadi","JEU_INC_N1_CUM");
+    public function delete(FormBuilder $formBuilder)
+    {
 
 
+        $form = $form = $this->getFotm();
+        if ($form->isValid()) {
+            dd($form->getData());
+        }
 
-        /**
-         * WORKING
-         */
-        // $rs = Backup::deteleAll("sys","elouadi");
+        return view('backup/deletebackup', compact('form'));
+    }
+    public function deleteAll(FormBuilder $formBuilder)
+    {
+        $form = $this->getFotm();
+        $form->redirectIfNotValid();
+        $data = $form->getFieldValues();
+        $rs = Backup::deteleAll($data['username'], $data['password']);
+
+        return view('backup/deletebackup', ['rs' => $rs]);
+    }
 
 
-        /**
-         * WORKING
-         */
-        // $rs = Backup::deteleByNumber("sys","elouadi","3");
-        return view('backup', ['listBackup' =>  $rs]);
+    private function getFotm()
+    {
+        return $this->formBuilder->create('App\Forms\FormBackup', [
+            'method' => 'POST',
+            'url' => route('delete_all'),
+        ]);
+    }
+
+
+    public function indexDeleteByNumber(FormBuilder $formBuilder)
+    {
+
+
+        $form = $form = $this->getFormForDeleteByNumber();
+        if ($form->isValid()) {
+            dd($form->getData());
+        }
+
+        return view('backup/deletebackupbynumber', compact('form'));
+    }
+    public function deleteByNumber(FormBuilder $formBuilder)
+    {
+        $form = $this->getFormForDeleteByNumber();
+        $form->redirectIfNotValid();
+        $data = $form->getFieldValues();
+        $rs = Backup::deteleByNumber($data['username'], $data['password'], $data['number']);
+
+        return view('backup/deletebackupbynumber', ['rs' => $rs]);
+    }
+    private function getFormForDeleteByNumber()
+    {
+        return $this->formBuilder->create('App\Forms\FormBackup', [
+            'method' => 'POST',
+            'url' => route('deletebackupbynumberForm'),
+            'data' => [
+                'number' => true
+            ]
+        ]);
     }
 }

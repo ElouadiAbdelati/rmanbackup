@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\FullBackup;
 use App\Models\Backup;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
 use function PHPUnit\Framework\isEmpty;
 
-class ListBackupController extends Controller
+class ListBackupTagController extends Controller
 {
     private $formBuilder;
     public function __construct(FormBuilder $formBuilder)
@@ -27,15 +26,15 @@ class ListBackupController extends Controller
             dd($form->getData());
         }
 
-        return view('backup/listbackups', compact('form'));
+        return view('backup/listbackupsbytag', compact('form'));
     }
 
-    public function listbackups(FormBuilder $formBuilder)
+    public function listbackupsByTag(FormBuilder $formBuilder)
     {
         $form = $this->getFotm();
         $form->redirectIfNotValid();
         $data = $form->getFieldValues();
-        $rs = Backup::listBuckups($data['username'], $data['password']);
+        $rs = Backup::listBackupsetTag($data['username'], $data['password'],$data['tag']);
 
         $find = false;
         $otherbackup = false;
@@ -61,12 +60,12 @@ class ListBackupController extends Controller
                 }
             }
         }
-        $error=false;
+       $error=false;
         if (empty($backups)) {
             $error=true;
         }
 
-        return view('backup/listbackups', ['backups' => $backups,'error'=>$error,'rs'=>$rs]);
+        return view('backup/listbackupsbytag', ['backups' => $backups,'error'=>$error,'rs'=>$rs]);
     }
 
 
@@ -74,7 +73,10 @@ class ListBackupController extends Controller
     {
         return $this->formBuilder->create('App\Forms\FormBackup', [
             'method' => 'POST',
-            'url' => route('listbackupsForm')
+            'url' => route('listbackupsTagForm'),
+            'data'=>[
+                'tag'=>true
+            ]
         ]);
     }
 }

@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\FullBackup;
 use App\Models\Backup;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
-class FullBackupController extends Controller
+class DiffrentialBackupController extends Controller
 {
-
-     private $formBuilder;
+    private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
          $this->formBuilder=$formBuilder;
@@ -25,18 +23,17 @@ class FullBackupController extends Controller
             dd($form->getData());
         }
 
-        return view('backup/fullbackup',compact('form'));
+        return view('backup/differentialbackup',compact('form'));
 
      }
 
-     public function fullbackup(FormBuilder $formBuilder)
+     public function differentialbackup(FormBuilder $formBuilder)
      {
          $form =$this->getFotm();
          $form->redirectIfNotValid();
          $data=$form->getFieldValues();
-         $rs = Backup::fullBackup($data['username'],$data['password']);
-
-         return view('backup/fullbackup',['rs'=>$rs]);
+         $rs = Backup::differentialBackup($data['username'],$data['password'],$data['level'],$data['tag']);
+         return view('backup/differentialbackup',['rs'=>$rs]);
 
      }
 
@@ -44,8 +41,11 @@ class FullBackupController extends Controller
      private function getFotm(){
        return $this->formBuilder->create('App\Forms\FormBackup', [
             'method' => 'POST',
-            'url' => route('fullbackupForm')
+            'url' => route('differentialbackupForm'),
+            'data'=> [
+                'level'=>true,
+                'tag'=>true,
+            ]
         ]);
      }
-
 }

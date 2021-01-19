@@ -6,7 +6,7 @@
             <div class=" col ">
                 <div class="card">
                     <div class="card-header bg-transparent">
-                        <h3 class="mb-0">Full Backup</h3>
+                        <h3 class="mb-0">Delete Backup</h3>
                     </div>
                     @isset($form)
                         {!! form_start($form) !!}
@@ -30,8 +30,8 @@
 
                                 <div class="col-lg-3col-md-3">
 
-                                    {!! form_row($form->envoyer, $options = ['attr' => ['title' => 'send for full backup',
-                                    'class' => 'btn-icon-clipboard', ' data-clipboard-text' => 'submit for full backup']]) !!}
+                                    {!! form_row($form->envoyer, $options = ['attr' => ['title' => 'submit for delete all backups',
+                                    'class' => 'btn-icon-clipboard', ' data-clipboard-text' => 'submit for delete all backups']]) !!}
                                 </div>
 
                             </div>

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\FullBackup;
 use App\Models\Backup;
+use App\Models\Database;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
-class FullBackupController extends Controller
+class CheckCurrentScnController extends Controller
 {
 
-     private $formBuilder;
+    private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
          $this->formBuilder=$formBuilder;
@@ -25,18 +25,18 @@ class FullBackupController extends Controller
             dd($form->getData());
         }
 
-        return view('backup/fullbackup',compact('form'));
+        return view('database/checkcurrentscn',compact('form'));
 
      }
 
-     public function fullbackup(FormBuilder $formBuilder)
+     public function checkCurrentScn(FormBuilder $formBuilder)
      {
          $form =$this->getFotm();
          $form->redirectIfNotValid();
          $data=$form->getFieldValues();
-         $rs = Backup::fullBackup($data['username'],$data['password']);
+         $rs = Database::checkCurrentScn($data['username'],$data['password']);
 
-         return view('backup/fullbackup',['rs'=>$rs]);
+         return view('database/checkcurrentscn',['rs'=>$rs]);
 
      }
 
@@ -44,8 +44,7 @@ class FullBackupController extends Controller
      private function getFotm(){
        return $this->formBuilder->create('App\Forms\FormBackup', [
             'method' => 'POST',
-            'url' => route('fullbackupForm')
+            'url' => route('checkCurrentScnForm'),
         ]);
      }
-
 }
