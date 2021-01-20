@@ -40,7 +40,7 @@ Route::get('/', function (Request $request) {
         return redirect('/loginapp');
      }
 
-     return redirect('/listbackups');
+     return redirect('/listbackupsTag');
 });
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');
