@@ -11,6 +11,7 @@ class IncrementalBackupController extends Controller
     private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
+        $this->middleware('login');
          $this->formBuilder=$formBuilder;
      }
 
@@ -27,12 +28,12 @@ class IncrementalBackupController extends Controller
 
      }
 
-     public function incrementalbackup(FormBuilder $formBuilder)
+     public function incrementalbackup(FormBuilder $formBuilder,Request $request)
      {
          $form =$this->getFotm();
          $form->redirectIfNotValid();
          $data=$form->getFieldValues();
-         $rs = Backup::backupIncremental($data['username'],$data['password'],$data['scn']);
+         $rs = Backup::backupIncremental($request->session()->get('username'),$request->session()->get('password'),$data['scn']);
 
          return view('backup/incrementalbackup',['rs'=>$rs]);
 
@@ -44,7 +45,8 @@ class IncrementalBackupController extends Controller
             'method' => 'POST',
             'url' => route('incrementalbackupForm'),
             'data'=> [
-                'scn'=>true
+                'scn'=>true,
+
             ]
         ]);
      }

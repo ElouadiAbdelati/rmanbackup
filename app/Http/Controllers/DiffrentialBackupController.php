@@ -11,6 +11,7 @@ class DiffrentialBackupController extends Controller
     private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
+        $this->middleware('login');
          $this->formBuilder=$formBuilder;
      }
 
@@ -27,12 +28,12 @@ class DiffrentialBackupController extends Controller
 
      }
 
-     public function differentialbackup(FormBuilder $formBuilder)
+     public function differentialbackup(FormBuilder $formBuilder,Request $request)
      {
          $form =$this->getFotm();
          $form->redirectIfNotValid();
          $data=$form->getFieldValues();
-         $rs = Backup::differentialBackup($data['username'],$data['password'],$data['level'],$data['tag']);
+         $rs = Backup::differentialBackup($request->session()->get('username'),$request->session()->get('password'),$data['level'],$data['tag']);
          return view('backup/differentialbackup',['rs'=>$rs]);
 
      }
@@ -45,6 +46,7 @@ class DiffrentialBackupController extends Controller
             'data'=> [
                 'level'=>true,
                 'tag'=>true,
+
             ]
         ]);
      }

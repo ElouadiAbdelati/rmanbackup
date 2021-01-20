@@ -41,4 +41,10 @@
   <script src="{{ asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <!-- Argon JS -->
   <script src="{{ asset('assets/js/argon.js?v=1.2.0')}}"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    function sweetAlert() {
+        return confirm("Are you sure ?");
+    }
+  </script>
 </html>

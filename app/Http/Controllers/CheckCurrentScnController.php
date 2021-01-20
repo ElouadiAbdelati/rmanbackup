@@ -13,6 +13,7 @@ class CheckCurrentScnController extends Controller
     private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
+        $this->middleware('login');
          $this->formBuilder=$formBuilder;
      }
 
@@ -29,12 +30,10 @@ class CheckCurrentScnController extends Controller
 
      }
 
-     public function checkCurrentScn(FormBuilder $formBuilder)
+     public function checkCurrentScn(FormBuilder $formBuilder,Request $request)
      {
-         $form =$this->getFotm();
-         $form->redirectIfNotValid();
-         $data=$form->getFieldValues();
-         $rs = Database::checkCurrentScn($data['username'],$data['password']);
+
+         $rs = Database::checkCurrentScn($request->session()->get('username'),$request->session()->get('password'));
 
          return view('database/checkcurrentscn',['rs'=>$rs]);
 

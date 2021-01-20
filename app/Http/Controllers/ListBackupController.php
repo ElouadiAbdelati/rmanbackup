@@ -14,7 +14,9 @@ class ListBackupController extends Controller
     private $formBuilder;
     public function __construct(FormBuilder $formBuilder)
     {
+        $this->middleware('login');
         $this->formBuilder = $formBuilder;
+
     }
 
 
@@ -23,19 +25,15 @@ class ListBackupController extends Controller
 
 
         $form =  $form = $this->getFotm();
-        if ($form->isValid()) {
-            dd($form->getData());
-        }
+
 
         return view('backup/listbackups', compact('form'));
     }
 
-    public function listbackups(FormBuilder $formBuilder)
+    public function listbackups(FormBuilder $formBuilder,Request $request)
     {
-        $form = $this->getFotm();
-        $form->redirectIfNotValid();
-        $data = $form->getFieldValues();
-        $rs = Backup::listBuckups($data['username'], $data['password']);
+
+        $rs = Backup::listBuckups($request->session()->get('username'),$request->session()->get('password'));
 
         $find = false;
         $otherbackup = false;

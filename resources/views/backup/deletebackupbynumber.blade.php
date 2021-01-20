@@ -14,19 +14,7 @@
 
                             <div class="row icon-examples">
 
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        {!! form_row($form->username, $options = ['attr' => ['class' => 'form-control',
-                                        'placeholder' => 'Username']]) !!}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="form-group">
-                                        {!! form_row($form->password, $options = ['attr' => ['class' => 'form-control',
-                                        'placeholder' => 'password']]) !!}
 
-                                    </div>
-                                </div>
                                 <div class="col-lg-6 col-md-6">
                                     <div class="form-group">
                                         {!! form_row($form->number, $options = ['attr' => ['class' => 'form-control',

@@ -12,6 +12,7 @@ class LogModeController extends Controller
     private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
+        $this->middleware('login');
          $this->formBuilder=$formBuilder;
      }
 
@@ -28,12 +29,10 @@ class LogModeController extends Controller
 
      }
 
-     public function logmode(FormBuilder $formBuilder)
+     public function logmode(FormBuilder $formBuilder,Request $request)
      {
-         $form =$this->getFotm();
-         $form->redirectIfNotValid();
-         $data=$form->getFieldValues();
-         $rs = Database::logMode($data['username'],$data['password']);
+
+         $rs = Database::logMode($request->session()->get('username'),$request->session()->get('password'));
 
          return view('database/logmode',['rs'=>$rs]);
 
@@ -59,12 +58,12 @@ class LogModeController extends Controller
         return view('database/modifylogmode',compact('form'));
 
      }
-     public function modifyLogMode(FormBuilder $formBuilder)
+     public function modifyLogMode(FormBuilder $formBuilder,Request $request)
      {
          $form =$this->getFormForModifyLogMode();
          $form->redirectIfNotValid();
          $data=$form->getFieldValues();
-         $rs = Database::modifyLogMode($data['username'],$data['password'],$data['mode']);
+         $rs = Database::modifyLogMode($request->session()->get('username'),$request->session()->get('password'),$data['mode']);
 
          return view('database/modifylogmode',['rs'=>$rs]);
 
@@ -74,7 +73,8 @@ class LogModeController extends Controller
              'method' => 'POST',
              'url' => route('modifylogmodeForm'),
             'data'=>[
-                'mode'=>true
+                'mode'=>true,
+
             ]
          ]);
       }

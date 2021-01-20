@@ -13,6 +13,7 @@ class BackupController extends Controller
     private $formBuilder;
     public function __construct(FormBuilder $formBuilder)
     {
+        $this->middleware('login');
         $this->formBuilder = $formBuilder;
     }
 
@@ -33,12 +34,10 @@ class BackupController extends Controller
 
         return view('backup/deletebackup', compact('form'));
     }
-    public function deleteAll(FormBuilder $formBuilder)
+    public function deleteAll(FormBuilder $formBuilder,Request $request)
     {
-        $form = $this->getFotm();
-        $form->redirectIfNotValid();
-        $data = $form->getFieldValues();
-        $rs = Backup::deteleAll($data['username'], $data['password']);
+
+        $rs = Backup::deteleAll($request->session()->get('username'),$request->session()->get('password'));
 
         return view('backup/deletebackup', ['rs' => $rs]);
     }
@@ -64,12 +63,12 @@ class BackupController extends Controller
 
         return view('backup/deletebackupbynumber', compact('form'));
     }
-    public function deleteByNumber(FormBuilder $formBuilder)
+    public function deleteByNumber(FormBuilder $formBuilder,Request $request)
     {
         $form = $this->getFormForDeleteByNumber();
         $form->redirectIfNotValid();
         $data = $form->getFieldValues();
-        $rs = Backup::deteleByNumber($data['username'], $data['password'], $data['number']);
+        $rs = Backup::deteleByNumber($request->session()->get('username'),$request->session()->get('password'), $data['number']);
 
         return view('backup/deletebackupbynumber', ['rs' => $rs]);
     }
@@ -79,7 +78,8 @@ class BackupController extends Controller
             'method' => 'POST',
             'url' => route('deletebackupbynumberForm'),
             'data' => [
-                'number' => true
+                'number' => true,
+
             ]
         ]);
     }

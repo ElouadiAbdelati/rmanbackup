@@ -13,6 +13,7 @@ class FullBackupController extends Controller
      private $formBuilder;
      public function __construct(FormBuilder $formBuilder)
      {
+        $this->middleware('login');
          $this->formBuilder=$formBuilder;
      }
 
@@ -29,12 +30,10 @@ class FullBackupController extends Controller
 
      }
 
-     public function fullbackup(FormBuilder $formBuilder)
+     public function fullbackup(FormBuilder $formBuilder,Request $request)
      {
-         $form =$this->getFotm();
-         $form->redirectIfNotValid();
-         $data=$form->getFieldValues();
-         $rs = Backup::fullBackup($data['username'],$data['password']);
+
+         $rs = Backup::fullBackup($request->session()->get('username'),$request->session()->get('password'));
 
          return view('backup/fullbackup',['rs'=>$rs]);
 

@@ -8,8 +8,12 @@ use App\Http\Controllers\IncrementalBackupController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ListBackupController;
 use App\Http\Controllers\ListBackupTagController;
+use App\Http\Controllers\LoginAppController;
 use App\Http\Controllers\LogModeController;
+use App\Http\Middleware\Login;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +27,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return redirect('/listbackups');
+Route::get('/logout', [LoginAppController::class, 'logout'])->name('logout');
+
+Route::get('/loginapp', [LoginAppController::class, 'index'])->name('loginApp');
+Route::any('/loginForm', [LoginAppController::class, 'login'])->name('loginForm');
+
+
+Route::get('/', function (Request $request) {
+     if($request->session()->get('username')==null){
+        $request->session()->put('username', 'none');
+        $request->session()->put('password', 'none');
+        return redirect('/loginapp');
+     }
+
+     return redirect('/listbackups');
 });
 
 Route::get('/index', [IndexController::class, 'index'])->name('index');

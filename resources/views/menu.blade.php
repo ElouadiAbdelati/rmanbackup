@@ -20,22 +20,23 @@
                 <span class="nav-link-text">Dashboard</span>
               </a>
               <hr class="my-3">
-              <li class="nav-item">
-                <a class="nav-link" href="{{url('listbackups')}}">
-                    <i class="ni ni-bullet-list-67 text-default"></i>
-                  <span class="nav-link-text">List backups</span>
-                </a>
-              </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="{{url('listbackupsTag')}}">
                     <i class="ni ni-bullet-list-67 text-default"></i>
                   <span class="nav-link-text">List backups by Tag</span>
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('listbackupsForm')}}" onclick="return sweetAlert();">
+                    <i class="ni ni-bullet-list-67 text-default"></i>
+                  <span class="nav-link-text">List backups</span>
+                </a>
+              </li>
               <hr class="my-3">
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('fullbackup')}}">
+              <a class="nav-link" href="{{url('fullbackupForm')}}" onclick="return sweetAlert();">
                 <i class="ni ni-archive-2 text-orange"></i>
                 <span class="nav-link-text">Full backup</span>
               </a>
@@ -54,13 +55,13 @@
               </li>
             <hr class="my-3">
             <li class="nav-item">
-                <a class="nav-link" href="{{url('checkCurrentScn')}}">
+                <a class="nav-link" href="{{url('checkCurrentScnForm')}}"  onclick="return sweetAlert();">
                   <i class="ni ni-bullet-list-67 text-default"></i>
                   <span class="nav-link-text">Check Current Scn</span>
                 </a>
               </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('logmode')}}">
+              <a class="nav-link" href="{{url('logmodeForm')}}" onclick="return sweetAlert();">
                 <i class="ni ni-check-bold text-default"></i>
                 <span class="nav-link-text">Log mode</span>
               </a>
@@ -73,7 +74,7 @@
             </li>
             <hr class="my-3">
             <li class="nav-item">
-                <a class="nav-link" href="{{url('delete')}}">
+                <a class="nav-link" href="{{url('deleteForm')}}" onclick="return sweetAlert();">
                   <i class="ni ni-fat-remove text-orange"></i>
                   <span class="nav-link-text"> delete backups</span>
                 </a>

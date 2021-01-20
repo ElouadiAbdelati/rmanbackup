@@ -9,6 +9,12 @@ class FormBackup extends Form
     public function buildForm()
     {
         $this
+
+            ->add('envoyer', 'submit');
+
+
+           if($this->getData('password')!=null && $this->getData('password')==true ){
+            $this
             ->add('username', 'text' ,[
 
                 'rules' => 'required',
@@ -22,8 +28,8 @@ class FormBackup extends Form
                 'password' => [
                     'password.required' => 'The title field is mandatory.'
                 ]
-            ])
-            ->add('envoyer', 'submit');
+            ]);
+           }
 
            if($this->getData('tag')!=null && $this->getData('tag')==true ){
 

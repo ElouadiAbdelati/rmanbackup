@@ -13,6 +13,7 @@ class ListBackupTagController extends Controller
     private $formBuilder;
     public function __construct(FormBuilder $formBuilder)
     {
+        $this->middleware('login');
         $this->formBuilder = $formBuilder;
     }
 
@@ -22,19 +23,16 @@ class ListBackupTagController extends Controller
 
 
         $form =  $form = $this->getFotm();
-        if ($form->isValid()) {
-            dd($form->getData());
-        }
 
         return view('backup/listbackupsbytag', compact('form'));
     }
 
-    public function listbackupsByTag(FormBuilder $formBuilder)
+    public function listbackupsByTag(FormBuilder $formBuilder,Request $request)
     {
         $form = $this->getFotm();
         $form->redirectIfNotValid();
         $data = $form->getFieldValues();
-        $rs = Backup::listBackupsetTag($data['username'], $data['password'],$data['tag']);
+        $rs = Backup::listBackupsetTag($request->session()->get('username'),$request->session()->get('password'),$data['tag']);
 
         $find = false;
         $otherbackup = false;
@@ -75,7 +73,8 @@ class ListBackupTagController extends Controller
             'method' => 'POST',
             'url' => route('listbackupsTagForm'),
             'data'=>[
-                'tag'=>true
+                'tag'=>true,
+
             ]
         ]);
     }
